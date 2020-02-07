@@ -25,7 +25,7 @@ ENV TZ "Asia/Tokyo"
 RUN groupadd -r verticadba
 RUN useradd -r -m -g verticadba dbadmin
 
-ADD vertica-*.rpm /rpms/vertica.rpm
+COPY vertica-*.rpm /rpms/vertica.rpm
 
 RUN yum install -y /rpms/vertica.rpm
 
@@ -46,7 +46,7 @@ VOLUME  /home/dbadmin/DEFAULTDB
 
 RUN echo 'export PATH="/opt/vertica/bin:/opt/vertica/packages/kafka/bin:$PATH"' >> /etc/bashrc
 
-ADD ./docker-entrypoint.sh /
+COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 5433
